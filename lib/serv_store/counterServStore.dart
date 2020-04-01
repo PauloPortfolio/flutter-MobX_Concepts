@@ -14,7 +14,7 @@ abstract class ICounterServRouter with Store {
     contObsv++;
   }
 
-  //A cada alteracao, rebuildar usando o: flutter packages pub run build_runner build
-  //ou acionar o watch, par anao ficar rebuldando: flutter packages pub run build_runner watch
+  //REBUILD: flutter packages pub run build_runner build
+  //WATCH: flutter packages pub run build_runner watch
 
 }

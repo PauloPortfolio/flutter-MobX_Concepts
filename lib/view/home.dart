@@ -32,25 +32,33 @@ class _HomeState extends State<Home> {
               .show(context);
       }),
 
-      // REACTION 02: ACONTECE NA CONDICAO SOMENTE
-      when(
-          (r) => store.contObsv >= 10,
-          () => Flushbar(
-                  title: "Opa",
-                  message: "E' par!. Acontece somente no ato da condicao",
-                  duration: Duration(milliseconds: 700))
-              .show(context)),
+//      // REACTION 02: ACONTECE UMA VEZ, E AUTODISPOSE
+      // RETORNA 'BOOLEANA'
+//      when(
+//          (r) => store.contObsv >= 10,
+//          () => Flushbar(
+//                  icon: Icon(Icons.notifications_active),
+//                  title: "Opa",
+//                  message: "E' maior ou igual ao NUMERO 10!!!. Acontece somente no ato da condicao",
+//                  duration: Duration(milliseconds: 700))
+//              .show(context)),
 
-      // REACTION 03: ACONTECE EM TODAS ACOES
-      autorun((r) => print('${store.contObsv}')),
+      // REACTION 03: DISPARA NA ALTERACAO DO OBSERVABLE
+      //autorun((r) => showFlushBar(context))
     ];
 
     super.initState();
   }
 
+//  @override
+//  void didChangeDependencies() {
+//    autorun((r) => showFlushBar(context));
+//    super.didChangeDependencies();
+//  }
+
   @override
   void dispose() {
-    //disposando todas as reactions, no ato d efechamenteo desta view
+    //disposando as reactions no fechamento desta view
     disposers.forEach((dispose) => dispose());
     super.dispose();
   }
@@ -65,14 +73,21 @@ class _HomeState extends State<Home> {
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Text(QUESTION),
           Observer(
-            builder: (BuildContext context) => Text(
-                '${store.contObsv} buildObs',
-                style: Theme.of(context).textTheme.display1),
+            builder: (BuildContext context) =>
+                Text('${store.contObsv} buildObs', style: Theme.of(context).textTheme.display1),
           )
         ]),
       ),
-      floatingActionButton:
-          FloatingActionButton(onPressed: store.incAction, child: ICON_BUTTON),
+      floatingActionButton: FloatingActionButton(onPressed: store.incAction, child: ICON_BUTTON),
     );
+  }
+
+  void showFlushBar(BuildContext context) {
+    Flushbar(
+        title: "AUTORUN",
+        icon: Icon(Icons.notifications_active),
+        message: "AUTORUN -> '${store.contObsv}",
+        duration: Duration(milliseconds: 700))
+      ..show(context);
   }
 }
