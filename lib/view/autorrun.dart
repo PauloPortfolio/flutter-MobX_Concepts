@@ -37,18 +37,6 @@ class _AutorrunState extends State<Autorrun> {
                 duration: Duration(milliseconds: 700))
             .show(context);
       }),
-
-      // REACTION 02: EXECUCAO UNICA C/ "AUTO DISPOSE"
-      // RETORNA 'BOOLEANA'
-//      when(
-//          (r) => store.contObsv >= 10,
-//          () => Flushbar(
-//                  icon: Icon(Icons.notifications_active),
-//                  title: "Opa",
-//                  message: "E' maior ou igual ao NUMERO 10!!!",
-//                  duration: Duration(milliseconds: 700))
-//              .show(context)),
-
     ];
 
     super.initState();
