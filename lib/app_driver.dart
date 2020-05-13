@@ -9,7 +9,7 @@ class AppDriver extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: TITLE_APP,
       debugShowCheckedModeBanner: APP_DEB_CHECK,
       theme: ThemeData(primarySwatch: Colors.blue),
       navigatorKey: Modular.navigatorKey,

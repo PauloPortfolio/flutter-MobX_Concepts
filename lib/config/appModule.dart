@@ -15,7 +15,7 @@ class AppModule extends MainModule {
   @override
   List<Router> get routers => [
         Router(HOME, child: (_, args) => Home()),
-        Router(AUTORUN, child: (_, args) => Autorrun()),
+        Router(AUTORRUN, child: (_, args) => Autorrun()),
       ];
 
   @override

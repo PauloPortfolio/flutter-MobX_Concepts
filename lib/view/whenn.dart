@@ -6,12 +6,12 @@ import 'package:mobx/mobx.dart';
 import '../config/appProperties.dart';
 import '../serv_store/servStore.dart';
 
-class Autorrun extends StatefulWidget {
+class Whenn extends StatefulWidget {
   @override
-  _AutorrunState createState() => _AutorrunState();
+  _WhennState createState() => _WhennState();
 }
 
-class _AutorrunState extends State<Autorrun> {
+class _WhennState extends State<Whenn> {
   //instancia o service_store, dever ser feito em DI
   final store = ServStore();
 
@@ -22,39 +22,22 @@ class _AutorrunState extends State<Autorrun> {
   @override
   void initState() {
     disposers = [
-
-      // REACTION 01: EXECUCAO MULTIPLA C/ "DEPENDENCIA DE DISPOSE"
-      reaction<int>((fn) => store.contObsv, (contagem) {
-        String msg = "";
-        if (contagem % 2 == 0) {
-          msg = "PAR";
-        } else {
-          msg = "IMPAR";
-        }
-        Flushbar(
-                title: msg,
-                message: "${msg}: Condicao e depois",
-                duration: Duration(milliseconds: 700))
-            .show(context);
-      }),
-
       // REACTION 02: EXECUCAO UNICA C/ "AUTO DISPOSE"
       // RETORNA 'BOOLEANA'
-//      when(
-//          (r) => store.contObsv >= 10,
-//          () => Flushbar(
-//                  icon: Icon(Icons.notifications_active),
-//                  title: "Opa",
-//                  message: "E' maior ou igual ao NUMERO 10!!!",
-//                  duration: Duration(milliseconds: 700))
-//              .show(context)),
-
+      when(
+          (r) => store.contObsv >= 10,
+          () => Flushbar(
+                  icon: Icon(Icons.notifications_active),
+                  title: "Opa",
+                  message: "E' maior ou igual ao NUMERO 10!!!",
+                  duration: Duration(milliseconds: 700))
+              .show(context)),
     ];
 
     super.initState();
   }
 
-//  @override
+  @override
   void dispose() {
     //DISPOSANDO A "REACTION 01" QUE POSSUI "DEPENDENCIA DE DISPOSE"
     disposers.forEach((dispose) => dispose());
@@ -63,13 +46,11 @@ class _AutorrunState extends State<Autorrun> {
 
   @override
   Widget build(BuildContext context) {
-    print('BuildHome');
-
     return Scaffold(
-      appBar: AppBar(title: Text(TITLE_AUTORRUN)),
+      appBar: AppBar(title: Text(TITLE_WHENN)),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(QUESTION_PAGE_AUTORRUN),
+          Text(QUESTION_PAGE_WHENN),
           Observer(
             builder: (BuildContext context) =>
                 Text('${store.contObsv} buildObs', style: Theme.of(context).textTheme.headline3),
